@@ -28,6 +28,7 @@
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.ADT import map as mp
+from DISClib.ADT import orderedmap as om
 from DISClib.DataStructures import mapentry as me
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
@@ -39,12 +40,92 @@ los mismos.
 
 # Construccion de modelos
 
+def newAnalyzer():
+    
+    analyzer = {'registros': None,
+                'artistas': None,
+                'pistas': None 
+                }
+
+    analyzer['registros'] = lt.newList('SINGLE_LINKED', compareIds)
+    analyzer['pistas'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareTrackId)
+
+    return analyzer
+
 # Funciones para agregar informacion al catalogo
+
+def addMusicEvent(analyzer, musicEvent):
+
+
+    lt.addLast(analyzer['registros'], musicEvent)
+   
+
+    return analyzer
+
+
+
+
 
 # Funciones para creacion de datos
 
+def newMusicEvent(musicEvent):
+    """
+    Crea una entrada en el indice por fechas, es decir en el arbol
+    binario.
+    """
+    entry = {'trackId': None, 'artistId': None}
+    entry['trackId'] = m.newMap(numelements= 100000000,
+                                     maptype='PROBING',
+                                     comparefunction=compareOffenses)
+    entry['artistId'] = lt.newList('SINGLE_LINKED', compareDates)
+    return entry
+
+
+
+
 # Funciones de consulta
 
+def musicSize(analyzer):
+
+    return lt.size(analyzer['registros'])
+
+def indexHeight(analyzer):
+    
+    return om.height(analyzer['pistas'])
+
+def indexSize(analyzer):
+
+    return om.size(analyzer['pistas'])
+
+def minKey(analyzer):
+  
+    return om.minKey(analyzer['pistas'])
+
+def maxKey(analyzer):
+ 
+    return om.maxKey(analyzer['pistas'])
+
+
 # Funciones utilizadas para comparar elementos dentro de una lista
+
+def compareIds(id1, id2):
+
+    if (id1 == id2):
+        return 0
+    elif id1 > id2:
+        return 1
+    else:
+        return -1
+
+def compareTrackId(tId1, tId2):
+
+    if (tId1 == tId2):
+        return 0
+    elif tId1 > tId2:
+        return 1
+    else:
+        return -1
+
 
 # Funciones de ordenamiento

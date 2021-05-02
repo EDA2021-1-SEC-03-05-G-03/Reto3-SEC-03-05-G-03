@@ -26,7 +26,6 @@ import controller
 from DISClib.ADT import list as lt
 assert cf
 
-
 """
 La vista se encarga de la interacción con el usuario
 Presenta el menu de opciones y por cada seleccion
@@ -34,10 +33,24 @@ se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
 
+hashTagF = 'user_track_hashtag_timestamp-small.csv'
+cont = None
+
+#El total de registros de eventos de escucha cargados
+#Total de artistas unicos cargados
+#Total de pistas de audio cargadas
+#Mostrar los primeros y ultimos 5 eventos de escucha cargados con sus caracteristicas
+
 def printMenu():
     print("Bienvenido")
-    print("1- Cargar información en el catálogo")
-    print("2- ")
+    print("1- Inicializar Analizador")
+    print("2- Cargar información en el catálogo")
+    print("3- ")
+    print("4- ")
+    print("5- ")
+
+
+
 
 catalog = None
 
@@ -47,8 +60,19 @@ Menu principal
 while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
+
     if int(inputs[0]) == 1:
-        print("Cargando información de los archivos ....")
+        print("\nInicializando....")
+        cont = controller.init()
+
+    elif int(inputs[0]) == 2:
+        print("\nCargando información de los archivos ....")
+        controller.loadData(cont, hashTagF)
+        print('Canciones cargadas: ' + str(controller.musicSize(cont)))
+        print('Altura del arbol: ' + str(controller.indexHeight(cont)))
+        print('Elementos en el arbol: ' + str(controller.indexSize(cont)))
+        print('Menor Llave: ' + str(controller.minKey(cont)))
+        print('Mayor Llave: ' + str(controller.maxKey(cont)))
 
     elif int(inputs[0]) == 2:
         pass
