@@ -37,16 +37,39 @@ def init():
 
 # Funciones para la carga de datos
 
-def loadData(analyzer, hashTagF):
+def loadData(analyzer, user, sentimen, content):
 
-    hashTagF = cf.data_dir + hashTagF
-    input_file = csv.DictReader(open(hashTagF, encoding="utf-8"),
-                                delimiter=",")
-    for music in input_file:
-        model.addMusicEvent(analyzer, music)
+    loaduser(analyzer, user)
+    loadsentiment(analyzer, sentimen)
+    loadcontext(analyzer, content)
     return analyzer
 
-# Funciones de ordenamiento
+def loaduser(analyzer, userfile):
+
+    files = cf.data_dir + userfile
+    input_file = csv.DictReader(open(files, encoding="utf-8"), delimiter = ",")
+
+    for user in input_file:
+        model.adduser(analyzer, user)
+    return analyzer
+
+def loadsentiment(analyzer, sentimentfile):
+
+    files = cf.data_dir + sentimentfile
+    input_file = csv.DictReader(open(files, encoding="utf-8"), delimiter = ",")
+
+    for sentiment in input_file:
+        model.addsentiments(analyzer, sentiment)
+    return analyzer
+
+def loadcontext(analyzer, contextfile):
+
+    files = cf.data_dir + contextfile
+    input_file = csv.DictReader(open(files, encoding="utf-8"), delimiter = ",")
+
+    for context in input_file:
+        model.addcontext(analyzer, context)
+    return analyzer
 
 
 # Funciones de consulta sobre el catálogo
@@ -74,3 +97,7 @@ def minKey(analyzer):
 def maxKey(analyzer):
 
     return model.maxKey(analyzer)
+
+def getArtist(analyzer):
+
+    return model.getArtist(analyzer)

@@ -42,27 +42,56 @@ los mismos.
 
 def newAnalyzer():
     
-    analyzer = {'registros': None,
-                'artistas': None,
-                'pistas': None 
+    analyzer = {'events': None,
+                'sentiments': None,
+                'user_track': None,
+                "context_content": None 
                 }
 
-    analyzer['registros'] = lt.newList('SINGLE_LINKED', compareIds)
-    analyzer['pistas'] = om.newMap(omaptype='RBT',
-                                    comparefunction=compareTrackId)
+    analyzer['events'] = lt.newList('SINGLE_LINKED', compareIds)
+    analyzer['sentiments'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
+    analyzer['user_track'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
+    analyzer['context_content'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
 
     return analyzer
 
 # Funciones para agregar informacion al catalogo
 
-def addMusicEvent(analyzer, musicEvent):
+def addsentiments(analyzer, sentiment):
 
+    om.put(analyzer["sentiments"], sentiment["hashtag"], sentiment)
 
-    lt.addLast(analyzer['registros'], musicEvent)
-   
+def adduser(analyzer, user):
 
-    return analyzer
+    contiene = om.contains(analyzer["user_track"], user["track_id"])
 
+    if not contiene:
+        lista = lt.newList()
+        lt.addLast(lista, user)
+        om.put(analyzer["user_track"], user["track_id"], lista)
+    
+    else:
+        obtener = om.get(analyzer["user_track"], user["track_id"])
+        valores = me.getValue(obtener)
+        lt.addLast(valores, user)
+
+def addcontext(analyzer, context):
+
+    contiene = om.contains(analyzer["context_content"], context["artist_id"])
+    lt.addLast(analyzer["events"], context)
+
+    if contiene == False:
+        lista = lt.newList()
+        lt.addLast(lista, context)
+        om.put(analyzer["context_content"], context["artist_id"], lista)
+
+    else:
+        valor = om.get(analyzer["context_content"], context["artist_id"])
+        listaNew = me.getValue(valor)
+        lt.addLast(listaNew, context)
 
 
 
@@ -75,10 +104,10 @@ def newMusicEvent(musicEvent):
     binario.
     """
     entry = {'trackId': None, 'artistId': None}
-    entry['trackId'] = m.newMap(numelements= 100000000,
+    entry['trackId'] = mp.newMap(numelements= 100000000,
                                      maptype='PROBING',
-                                     comparefunction=compareOffenses)
-    entry['artistId'] = lt.newList('SINGLE_LINKED', compareDates)
+                                     comparefunction=compareIds(id1, id2))
+    entry['artistId'] = lt.newList('SINGLE_LINKED', compareTrackId(tId1, tId2))
     return entry
 
 
@@ -99,12 +128,16 @@ def indexSize(analyzer):
     return om.size(analyzer['pistas'])
 
 def minKey(analyzer):
-  
+
     return om.minKey(analyzer['pistas'])
 
 def maxKey(analyzer):
  
     return om.maxKey(analyzer['pistas'])
+
+def getArtist(analyzer):
+
+    return om.get(analyzer["pistas"], "user_id")
 
 
 # Funciones utilizadas para comparar elementos dentro de una lista

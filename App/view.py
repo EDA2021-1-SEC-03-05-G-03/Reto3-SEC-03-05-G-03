@@ -24,6 +24,7 @@ import config as cf
 import sys
 import controller
 from DISClib.ADT import list as lt
+from DISClib.ADT import orderedmap as om
 assert cf
 
 """
@@ -33,7 +34,9 @@ se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
 
-hashTagF = 'user_track_hashtag_timestamp-small.csv'
+user = "user_track_hashtag_timestamp-small.csv"
+sentimen = "sentiment_values.csv"
+content = "context_content_features-small.csv"
 cont = None
 
 #El total de registros de eventos de escucha cargados
@@ -42,14 +45,22 @@ cont = None
 #Mostrar los primeros y ultimos 5 eventos de escucha cargados con sus caracteristicas
 
 def printMenu():
-    print("Bienvenido")
-    print("1- Inicializar Analizador")
-    print("2- Cargar información en el catálogo")
-    print("3- ")
-    print("4- ")
-    print("5- ")
+    print("\nBienvenido")
+    print("1- Cargar información en el catálogo")
+    print("2- ")
+   # print("3- ")
+   # print("4- ")
+   # print("5- ")
 
 
+def retornar5(analyzer):
+    for i in range(0, 5):
+        print(lt.getElement(analyzer["events"], i))
+    j = 0
+
+    while j <= 4:
+        print(lt.getElement(analyzer["events"], lt.size(analyzer["events"]) - j))
+        j += 1
 
 
 catalog = None
@@ -61,22 +72,36 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
 
-    if int(inputs[0]) == 1:
-        print("\nInicializando....")
-        cont = controller.init()
 
-    elif int(inputs[0]) == 2:
+    if int(inputs[0]) == 1:
         print("\nCargando información de los archivos ....")
-        controller.loadData(cont, hashTagF)
-        print('Canciones cargadas: ' + str(controller.musicSize(cont)))
-        print('Altura del arbol: ' + str(controller.indexHeight(cont)))
-        print('Elementos en el arbol: ' + str(controller.indexSize(cont)))
-        print('Menor Llave: ' + str(controller.minKey(cont)))
-        print('Mayor Llave: ' + str(controller.maxKey(cont)))
+        cont = controller.init()
+        cont = controller.loadData(cont, user, sentimen, content)
+        print('Numero de eventos: ' + str(lt.size(cont["events"])))
+
+        valores = om.keySet(cont["context_content"])
+        print('Numero de artistas: ' + str(lt.size(valores)))
+
+        valor = om.keySet(cont["user_track"])
+        print('Numero de pistas: ' + str(lt.size(valor)))
+
+        #rint(retornar5(cont))
+        for i in range(0, 5):
+            print(lt.getElement(cont["events"], i))
+            j = 0
+
+        while j <= 4:
+            print(lt.getElement(cont["events"], lt.size(cont["events"]) - j))
+            j += 1
+
 
     elif int(inputs[0]) == 2:
         pass
 
     else:
         sys.exit(0)
+
+
+
+
 sys.exit(0)
