@@ -45,7 +45,8 @@ def newAnalyzer():
     analyzer = {'events': None,
                 'sentiments': None,
                 'user_track': None,
-                "context_content": None 
+                "context_content": None,
+                "cont" 
                 }
 
     analyzer['events'] = lt.newList('SINGLE_LINKED', compareIds)
@@ -55,6 +56,25 @@ def newAnalyzer():
                                     comparefunction=compareIds)
     analyzer['context_content'] = om.newMap(omaptype='RBT',
                                     comparefunction=compareIds)
+    analyzer["cont"] = mp.newMap()
+
+    instrumentalnessT = om.newMap()
+    mp.put(analyzer["cont"], "instrumentalness", instrumentalnessT)
+
+    livenessT = om.newMap()
+    mp.put(analyzer["cont"], "liveness", livenessT)
+
+    speechinessT = om.newMap()
+    mp.put(analyzer["cont"], "speechiness", speechinessT)
+
+    danceabilityT = om.newMap()
+    mp.put(analyzer["cont"], "danceability", danceabilityT)
+
+    valenceT = om.newMap()
+    mp.put(analyzer["cont"], "valence", valenceT)
+
+    loudnessT = om.newMap()
+    mp.put(analyzer["cont"], "loudness", loudnessT)
 
     return analyzer
 
@@ -93,9 +113,6 @@ def addcontext(analyzer, context):
         listaNew = me.getValue(valor)
         lt.addLast(listaNew, context)
 
-
-
-
 # Funciones para creacion de datos
 
 def newMusicEvent(musicEvent):
@@ -109,9 +126,6 @@ def newMusicEvent(musicEvent):
                                      comparefunction=compareIds(id1, id2))
     entry['artistId'] = lt.newList('SINGLE_LINKED', compareTrackId(tId1, tId2))
     return entry
-
-
-
 
 # Funciones de consulta
 
@@ -132,7 +146,7 @@ def minKey(analyzer):
     return om.minKey(analyzer['pistas'])
 
 def maxKey(analyzer):
- 
+    
     return om.maxKey(analyzer['pistas'])
 
 def getArtist(analyzer):
