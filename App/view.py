@@ -39,10 +39,6 @@ sentimen = "sentiment_values.csv"
 content = "context_content_features-small.csv"
 cont = None
 
-#El total de registros de eventos de escucha cargados
-#Total de artistas unicos cargados
-#Total de pistas de audio cargadas
-#Mostrar los primeros y ultimos 5 eventos de escucha cargados con sus caracteristicas
 
 def printMenu():
     print("\nBienvenido")
@@ -53,16 +49,6 @@ def printMenu():
     print("4- Canciones por genero en un rango   - Req 4")
     print("5- Agregar un nuevo genero musical    - Req 4-2")
     print("6- Genero mas escuchado en un tiempo  - Req 5")
-
-
-def retornar5(analyzer):
-    for i in range(0, 5):
-        print(lt.getElement(analyzer["events"], i))
-    j = 0
-
-    while j <= 4:
-        print(lt.getElement(analyzer["events"], lt.size(analyzer["events"]) - j))
-        j += 1
 
 
 catalog = None
@@ -79,6 +65,7 @@ while True:
         print("\nCargando información de los archivos ....")
         cont = controller.init()
         cont = controller.loadData(cont, user, sentimen, content)
+
         print('Numero de eventos: ' + str(lt.size(cont["events"])))
 
         valores = om.keySet(cont["context_content"])
@@ -87,7 +74,6 @@ while True:
         valor = om.keySet(cont["user_track"])
         print('Numero de pistas: ' + str(lt.size(valor)))
 
-        #rint(retornar5(cont))
         for i in range(1, 6):
             print(lt.getElement(cont["events"], i))
             j = 0
@@ -97,18 +83,30 @@ while True:
             j += 1
 
 
-
     elif int(inputs[0]) == 2:
-        pass
+
+        nombre = str(input("Ingrese el nombre de la caracteristica: "))
+        val_min = float(input("Ingrese el valor minimo de la caracteristica: "))
+        val_max = float(input("Ingrese el valor maximo de la caracteristica: "))
+
+        datos = controller.req1(nombre, val_min, val_max, cont)
 
 
     elif int(inputs[0]) == 3:
-        pass
+
+        val_min = int(input("Ingrese el valor minimo de Energy: "))
+        val_max = int(input("Ingrese el valor maximo de Energy: "))
+        val_mind = int(input("Ingrese el valor minimo de Danceability: "))
+        val_maxd = int(input("Ingrese el valor maximo de Danceability: "))
 
 
     elif int(inputs[0]) == 4:
-        pass
 
+        val_min = int(input("Ingrese el valor minimo del rango de Instrumentalness: "))
+        val_max = int(input("Ingrese el valor maximo del rango de Instrumentalness: "))
+        val_mint = int(input("Ingrese el valor minimo del rango de Tempo: "))
+        val_maxt = int(input("Ingrese el valor maximo del rango de Tempo: "))
+        
 
     elif int(inputs[0]) == 5:
         
@@ -120,7 +118,9 @@ while True:
 
 
     elif int(inputs[0]) == 6:
-        pass
+
+        val_min = int(input("Ingrese el valor minimo de la hora: "))
+        val_max = int(input("Ingrese el valor maximo de la hora: "))
 
 
     else:

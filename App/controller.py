@@ -105,6 +105,13 @@ def getArtist(analyzer):
 
 
 
+
+def req1(nombre, val_min, val_max, cont):
+
+    return model.req1(nombre, val_min, val_max, cont)
+
+
+
 def agregar_nuevo(nombre, val_min, val_max):
     
     return model.agregar_nuevo(nombre, val_min, val_max, model.diccionario_generos())

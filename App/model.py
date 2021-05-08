@@ -46,7 +46,7 @@ def newAnalyzer():
                 'sentiments': None,
                 'user_track': None,
                 "context_content": None,
-                "cont" 
+                "cont": None
                 }
 
     analyzer['events'] = lt.newList('SINGLE_LINKED', compareIds)
@@ -56,24 +56,24 @@ def newAnalyzer():
                                     comparefunction=compareIds)
     analyzer['context_content'] = om.newMap(omaptype='RBT',
                                     comparefunction=compareIds)
-    analyzer["cont"] = mp.newMap()
+    analyzer["cont"] = mp.newMap(maptype='PROBING')
 
-    instrumentalnessT = om.newMap()
+    instrumentalnessT = om.newMap(comparefunction=compareIds)
     mp.put(analyzer["cont"], "instrumentalness", instrumentalnessT)
 
-    livenessT = om.newMap()
+    livenessT = om.newMap(comparefunction=compareIds)
     mp.put(analyzer["cont"], "liveness", livenessT)
 
-    speechinessT = om.newMap()
+    speechinessT = om.newMap(comparefunction=compareIds)
     mp.put(analyzer["cont"], "speechiness", speechinessT)
 
-    danceabilityT = om.newMap()
+    danceabilityT = om.newMap(comparefunction=compareIds)
     mp.put(analyzer["cont"], "danceability", danceabilityT)
 
-    valenceT = om.newMap()
+    valenceT = om.newMap(comparefunction=compareIds)
     mp.put(analyzer["cont"], "valence", valenceT)
 
-    loudnessT = om.newMap()
+    loudnessT = om.newMap(comparefunction=compareIds)
     mp.put(analyzer["cont"], "loudness", loudnessT)
 
     return analyzer
@@ -112,6 +112,9 @@ def addcontext(analyzer, context):
         valor = om.get(analyzer["context_content"], context["artist_id"])
         listaNew = me.getValue(valor)
         lt.addLast(listaNew, context)
+    
+
+
 
 # Funciones para creacion de datos
 
@@ -175,7 +178,28 @@ def compareTrackId(tId1, tId2):
         return -1
 
 
-# Funciones de ordenamiento
+# Funciones de los requerimientos
+
+
+#Req 1
+
+def req1(nombre, val_min, val_max, cont):
+    print(cont["events"])
+    #lst = om.values(cont["content"], val_min, val_max)
+    #contador = 0
+    #for i in lt.iterator(lst):
+    #    contador += lt.size(i[nombre])
+
+
+    #print (lst)
+
+
+
+
+
+
+
+# Req 4
 
 def diccionario_generos():
     dicc = {"Reggae": (60, 90),
