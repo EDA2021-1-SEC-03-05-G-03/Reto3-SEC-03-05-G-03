@@ -47,10 +47,12 @@ cont = None
 def printMenu():
     print("\nBienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- ")
-   # print("3- ")
-   # print("4- ")
-   # print("5- ")
+    print("2- Caracterizar las reproducciones    - Req 1")
+    print("3- Encontrar musica para festejar     - Req 2")
+    print("3- Encontrar musica para estudiar     - Req 3")
+    print("4- Canciones por genero en un rango   - Req 4")
+    print("5- Agregar un nuevo genero musical    - Req 4-2")
+    print("6- Genero mas escuchado en un tiempo  - Req 5")
 
 
 def retornar5(analyzer):
@@ -97,6 +99,28 @@ while True:
 
     elif int(inputs[0]) == 2:
         pass
+
+
+    elif int(inputs[0]) == 3:
+        pass
+
+
+    elif int(inputs[0]) == 4:
+        pass
+
+
+    elif int(inputs[0]) == 5:
+        
+        nombre = str(input("Ingrese el nombre del nuevo genero: "))
+        val_min = int(input("Ingrese el valor minimo del Tempo: "))
+        val_max = int(input("Ingrese el valor maximo del Tempo: "))
+
+        print(controller.agregar_nuevo(nombre, val_min, val_max))
+
+
+    elif int(inputs[0]) == 6:
+        pass
+
 
     else:
         sys.exit(0)

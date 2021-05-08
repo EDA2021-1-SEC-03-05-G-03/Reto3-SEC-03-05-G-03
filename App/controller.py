@@ -101,3 +101,10 @@ def maxKey(analyzer):
 def getArtist(analyzer):
 
     return model.getArtist(analyzer)
+
+
+
+
+def agregar_nuevo(nombre, val_min, val_max):
+    
+    return model.agregar_nuevo(nombre, val_min, val_max, model.diccionario_generos())

@@ -162,3 +162,20 @@ def compareTrackId(tId1, tId2):
 
 
 # Funciones de ordenamiento
+
+def diccionario_generos():
+    dicc = {"Reggae": (60, 90),
+            "Down-tempo": (70, 100),
+            "Chill-out": (90, 120),
+            "Hip-hop": (85, 115),
+            "Jazz and Funk": (120, 125),
+            "Pop": (100, 130),
+            "R&B": (60, 90),
+            "Rock": (60, 90),
+            "Metal": (60, 90)}
+    return dicc
+
+
+def agregar_nuevo(nombre, val_min, val_max, dic):
+    dic[nombre] = (val_min, val_max)
+    return dic
