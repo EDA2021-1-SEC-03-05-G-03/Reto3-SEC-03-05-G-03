@@ -88,13 +88,14 @@ while True:
         print('Numero de pistas: ' + str(lt.size(valor)))
 
         #rint(retornar5(cont))
-        for i in range(0, 5):
+        for i in range(1, 6):
             print(lt.getElement(cont["events"], i))
             j = 0
 
-        while j <= 4:
+        while j <= 5:
             print(lt.getElement(cont["events"], lt.size(cont["events"]) - j))
             j += 1
+
 
 
     elif int(inputs[0]) == 2:
