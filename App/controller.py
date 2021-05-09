@@ -69,6 +69,15 @@ def loadcontext(analyzer, contextfile):
 
     for context in input_file:
         model.addcontext(analyzer, context)
+        model.adddanceability(analyzer, context)
+        model.addenergy(analyzer, context)
+        model.addinstrumentalness(analyzer, context)
+        model.addliveness(analyzer, context)
+        model.addspeechiness(analyzer, context)
+        model.addvalence(analyzer, context)
+        model.addloudness(analyzer, context)
+        model.addtempo(analyzer, context)
+        model.addacousticness(analyzer, context)
     return analyzer
 
 
@@ -110,6 +119,9 @@ def req1(nombre, val_min, val_max, cont):
 
     return model.req1(nombre, val_min, val_max, cont)
 
+def req2(cont, val_min, val_max, val_mind, val_maxd):
+
+    return model.req2(cont, val_min, val_max, val_mind, val_maxd)
 
 
 def agregar_nuevo(nombre, val_min, val_max):

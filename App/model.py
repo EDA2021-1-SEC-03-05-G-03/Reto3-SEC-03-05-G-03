@@ -46,7 +46,16 @@ def newAnalyzer():
                 'sentiments': None,
                 'user_track': None,
                 "context_content": None,
-                "cont": None
+                "track_ids":None,
+                "danceability":None,
+                "energy":None,
+                "instrumentalness":None,
+                "liveness":None,
+                "speechiness":None,
+                "valence":None,
+                "loudness":None,
+                "tempo":None,
+                "acousticness":None,
                 }
 
     analyzer['events'] = lt.newList('SINGLE_LINKED', compareIds)
@@ -56,25 +65,26 @@ def newAnalyzer():
                                     comparefunction=compareIds)
     analyzer['context_content'] = om.newMap(omaptype='RBT',
                                     comparefunction=compareIds)
-    analyzer["cont"] = mp.newMap(maptype='PROBING')
-
-    instrumentalnessT = om.newMap(comparefunction=compareIds)
-    mp.put(analyzer["cont"], "instrumentalness", instrumentalnessT)
-
-    livenessT = om.newMap(comparefunction=compareIds)
-    mp.put(analyzer["cont"], "liveness", livenessT)
-
-    speechinessT = om.newMap(comparefunction=compareIds)
-    mp.put(analyzer["cont"], "speechiness", speechinessT)
-
-    danceabilityT = om.newMap(comparefunction=compareIds)
-    mp.put(analyzer["cont"], "danceability", danceabilityT)
-
-    valenceT = om.newMap(comparefunction=compareIds)
-    mp.put(analyzer["cont"], "valence", valenceT)
-
-    loudnessT = om.newMap(comparefunction=compareIds)
-    mp.put(analyzer["cont"], "loudness", loudnessT)
+    analyzer['track_ids'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
+    analyzer['danceability'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
+    analyzer['energy'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
+    analyzer['instrumentalness'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIdsNum)
+    analyzer['liveness'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
+    analyzer['speechiness'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
+    analyzer['valence'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
+    analyzer['loudness'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
+    analyzer['tempo'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
+    analyzer['acousticness'] = om.newMap(omaptype='RBT',
+                                    comparefunction=compareIds)
 
     return analyzer
 
@@ -113,6 +123,132 @@ def addcontext(analyzer, context):
         listaNew = me.getValue(valor)
         lt.addLast(listaNew, context)
     
+def adddanceability(analyzer, context):
+
+    contiene = om.contains(analyzer["danceability"], context["danceability"])
+
+    if not contiene:
+        lista = lt.newList()
+        lt.addLast(lista, context)
+        om.put(analyzer["danceability"], context["danceability"], lista)
+    
+    else:
+        obtener = om.get(analyzer["danceability"], context["danceability"])
+        valores = me.getValue(obtener)
+        lt.addLast(valores, context)
+
+def addenergy(analyzer, context):
+
+    contiene = om.contains(analyzer["energy"], context["energy"])
+
+    if not contiene:
+        lista = lt.newList()
+        lt.addLast(lista, context)
+        om.put(analyzer["energy"], context["energy"], lista)
+    
+    else:
+        obtener = om.get(analyzer["energy"], context["energy"])
+        valores = me.getValue(obtener)
+        lt.addLast(valores, context)
+
+def addinstrumentalness(analyzer, context):
+
+    contiene = om.contains(analyzer["instrumentalness"], context["instrumentalness"])
+
+    if not contiene:
+        lista = lt.newList()
+        lt.addLast(lista, context)
+        om.put(analyzer["instrumentalness"], context["instrumentalness"], lista)
+    
+    else:
+        obtener = om.get(analyzer["instrumentalness"], context["instrumentalness"])
+        valores = me.getValue(obtener)
+        lt.addLast(valores, context)
+
+def addliveness(analyzer, context):
+
+    contiene = om.contains(analyzer["liveness"], context["liveness"])
+
+    if not contiene:
+        lista = lt.newList()
+        lt.addLast(lista, context)
+        om.put(analyzer["liveness"], context["liveness"], lista)
+    
+    else:
+        obtener = om.get(analyzer["liveness"], context["liveness"])
+        valores = me.getValue(obtener)
+        lt.addLast(valores, context)
+
+def addspeechiness(analyzer, context):
+
+    contiene = om.contains(analyzer["speechiness"], context["speechiness"])
+
+    if not contiene:
+        lista = lt.newList()
+        lt.addLast(lista, context)
+        om.put(analyzer["speechiness"], context["speechiness"], lista)
+    
+    else:
+        obtener = om.get(analyzer["speechiness"], context["speechiness"])
+        valores = me.getValue(obtener)
+        lt.addLast(valores, context)
+
+def addvalence(analyzer, context):
+
+    contiene = om.contains(analyzer["valence"], context["valence"])
+
+    if not contiene:
+        lista = lt.newList()
+        lt.addLast(lista, context)
+        om.put(analyzer["valence"], context["valence"], lista)
+    
+    else:
+        obtener = om.get(analyzer["valence"], context["valence"])
+        valores = me.getValue(obtener)
+        lt.addLast(valores, context)
+
+def addloudness(analyzer, context):
+
+    contiene = om.contains(analyzer["loudness"], context["loudness"])
+
+    if not contiene:
+        lista = lt.newList()
+        lt.addLast(lista, context)
+        om.put(analyzer["loudness"], context["loudness"], lista)
+    
+    else:
+        obtener = om.get(analyzer["loudness"], context["loudness"])
+        valores = me.getValue(obtener)
+        lt.addLast(valores, context)
+
+def addtempo(analyzer, context):
+
+    contiene = om.contains(analyzer["tempo"], context["tempo"])
+
+    if not contiene:
+        lista = lt.newList()
+        lt.addLast(lista, context)
+        om.put(analyzer["tempo"], context["tempo"], lista)
+    
+    else:
+        obtener = om.get(analyzer["tempo"], context["tempo"])
+        valores = me.getValue(obtener)
+        lt.addLast(valores, context)
+
+def addacousticness(analyzer, context):
+
+    contiene = om.contains(analyzer["acousticness"], context["acousticness"])
+
+    if not contiene:
+        lista = lt.newList()
+        lt.addLast(lista, context)
+        om.put(analyzer["acousticness"], context["acousticness"], lista)
+    
+    else:
+        obtener = om.get(analyzer["acousticness"], context["acousticness"])
+        valores = me.getValue(obtener)
+        lt.addLast(valores, context)
+
 
 
 
@@ -161,9 +297,18 @@ def getArtist(analyzer):
 
 def compareIds(id1, id2):
 
-    if (id1 == id2):
+    if id1 == id2:
         return 0
     elif id1 > id2:
+        return 1
+    else:
+        return -1
+
+def compareIdsNum(id1, id2):
+
+    if float(id1 == id2):
+        return 0
+    elif float(id1) > float(id2):
         return 1
     else:
         return -1
@@ -184,15 +329,101 @@ def compareTrackId(tId1, tId2):
 #Req 1
 
 def req1(nombre, val_min, val_max, cont):
-    print(cont["events"])
-    #lst = om.values(cont["content"], val_min, val_max)
+
+    #datos = om.values(cont[nombre], val_min, val_max)
     #contador = 0
-    #for i in lt.iterator(lst):
-    #    contador += lt.size(i[nombre])
+    #for i in lt.iterator(datos):
+        #print(i["first"])
+    #    for j in i["info"]:
+    #        print(j)
+    #        contador += 1
+        
+    #print (contador)
+    #sise = lt.size(datos)
+    #return lista
+
+    datos = om.values(cont[nombre], val_min, val_max)
+    iter1 = iterator.newIterator(datos)
+    contador = 0
+    lista = lt.newList("SINGLE_LINKED")
+
+    while iterator.hasNext(iter1):
+        x = iterator.next(iter1)
+        contador += lt.size(x)
+        iter2 = iterator.newIterator(x)
+
+        while iterator.hasNext(iter2):
+            y = iterator.next(iter2)
+            artistas = mp.get(y, "artist_id")
+            valores = me.getValue(artistas)
+
+            if lt.isPresent(lista, valores) == 0:
+                lt.addLast(lista, valores)
+    cantidad = lt.size(lista)
+    dupla = (cantidad, contador)
+    
+
+    return (dupla)
 
 
-    #print (lst)
+#Req 2
 
+def req2(cont, val_min, val_max, val_mind, val_maxd):
+
+    #datos = om.values(cont[nombre], val_min, val_max)
+    #contador = 0
+    #for i in lt.iterator(datos):
+        #print(i["first"])
+    #    for j in i["info"]:
+    #        print(j)
+    #        contador += 1
+        
+    #print (contador)
+    #sise = lt.size(datos)
+    #return lista
+
+    datos = om.values(cont["energy"], val_min, val_max)
+    iter1 = iterator.newIterator(datos)
+    contador = 0
+    lista = lt.newList("SINGLE_LINKED")
+
+    while iterator.hasNext(iter1):
+        x = iterator.next(iter1)
+        contador += lt.size(x)
+        iter2 = iterator.newIterator(x)
+
+        while iterator.hasNext(iter2):
+            y = iterator.next(iter2)
+            artistas = mp.get(y, "artist_id")
+            valores = me.getValue(artistas)
+
+            if lt.isPresent(lista, valores) == 0:
+                lt.addLast(lista, valores)
+    cantidad = lt.size(lista)
+    dupla = (cantidad, contador)
+    
+    datosd = om.values(cont["danceability"], val_mind, val_maxd)
+    iter1d = iterator.newIterator(datosd)
+    contadord = 0
+    listad = lt.newList("SINGLE_LINKED")
+
+    while iterator.hasNext(iter1d):
+        xd = iterator.next(iter1d)
+        contador += lt.size(xd)
+        iter2d = iterator.newIterator(xd)
+
+        while iterator.hasNext(iter2d):
+            yd = iterator.next(iter2d)
+            artistasd = mp.get(yd, "artist_id")
+            valoresd = me.getValue(artistasd)
+
+            if lt.isPresent(listad, valoresd) == 0:
+                lt.addLast(listad, valoresd)
+    cantidadd = lt.size(listad)
+    duplad = (cantidadd, contadord)
+
+
+    return (dupla, duplad)
 
 
 

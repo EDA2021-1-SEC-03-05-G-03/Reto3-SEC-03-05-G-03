@@ -42,9 +42,9 @@ cont = None
 
 def printMenu():
     print("\nBienvenido")
-    print("1- Cargar información en el catálogo")
-    print("2- Caracterizar las reproducciones    - Req 1")
-    print("3- Encontrar musica para festejar     - Req 2")
+    print("0- Cargar información en el catálogo")
+    print("1- Caracterizar las reproducciones    - Req 1")
+    print("2- Encontrar musica para festejar     - Req 2")
     print("3- Encontrar musica para estudiar     - Req 3")
     print("4- Canciones por genero en un rango   - Req 4")
     print("5- Agregar un nuevo genero musical    - Req 4-2")
@@ -61,7 +61,7 @@ while True:
     inputs = input('Seleccione una opción para continuar\n')
 
 
-    if int(inputs[0]) == 1:
+    if int(inputs[0]) == 0:
         print("\nCargando información de los archivos ....")
         cont = controller.init()
         cont = controller.loadData(cont, user, sentimen, content)
@@ -83,29 +83,37 @@ while True:
             j += 1
 
 
-    elif int(inputs[0]) == 2:
+    elif int(inputs[0]) == 1:
 
         nombre = str(input("Ingrese el nombre de la caracteristica: "))
         val_min = float(input("Ingrese el valor minimo de la caracteristica: "))
         val_max = float(input("Ingrese el valor maximo de la caracteristica: "))
 
         datos = controller.req1(nombre, val_min, val_max, cont)
+        print(datos)
 
 
-    elif int(inputs[0]) == 3:
+    elif int(inputs[0]) == 2:
 
         val_min = int(input("Ingrese el valor minimo de Energy: "))
         val_max = int(input("Ingrese el valor maximo de Energy: "))
         val_mind = int(input("Ingrese el valor minimo de Danceability: "))
         val_maxd = int(input("Ingrese el valor maximo de Danceability: "))
 
+        datos = controller.req2(cont, val_min, val_max, val_mind, val_maxd)
 
-    elif int(inputs[0]) == 4:
+
+    elif int(inputs[0]) == 3:
 
         val_min = int(input("Ingrese el valor minimo del rango de Instrumentalness: "))
         val_max = int(input("Ingrese el valor maximo del rango de Instrumentalness: "))
         val_mint = int(input("Ingrese el valor minimo del rango de Tempo: "))
         val_maxt = int(input("Ingrese el valor maximo del rango de Tempo: "))
+        
+
+    elif int(inputs[0]) == 4:
+        
+        nombre = str(input("Ingrese el nombre del genero: "))
         
 
     elif int(inputs[0]) == 5:
