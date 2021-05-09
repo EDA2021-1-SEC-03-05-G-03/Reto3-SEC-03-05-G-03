@@ -24,12 +24,13 @@
  * Dario Correal - Version inicial
  """
 
-
+from DISClib.DataStructures import linkedlistiterator as it
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.ADT import map as mp
 from DISClib.ADT import orderedmap as om
 from DISClib.DataStructures import mapentry as me
+
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
 
@@ -343,17 +344,17 @@ def req1(nombre, val_min, val_max, cont):
     #return lista
 
     datos = om.values(cont[nombre], val_min, val_max)
-    iter1 = iterator.newIterator(datos)
+    iter1 = it.newIterator(datos)
     contador = 0
     lista = lt.newList("SINGLE_LINKED")
 
-    while iterator.hasNext(iter1):
-        x = iterator.next(iter1)
+    while it.hasNext(iter1):
+        x = it.next(iter1)
         contador += lt.size(x)
-        iter2 = iterator.newIterator(x)
+        iter2 = it.newIterator(x)
 
-        while iterator.hasNext(iter2):
-            y = iterator.next(iter2)
+        while it.hasNext(iter2):
+            y = it.next(iter2)
             artistas = mp.get(y, "artist_id")
             valores = me.getValue(artistas)
 
@@ -362,8 +363,9 @@ def req1(nombre, val_min, val_max, cont):
     cantidad = lt.size(lista)
     dupla = (cantidad, contador)
     
+    lt.
 
-    return (dupla)
+    return dupla
 
 
 #Req 2
@@ -383,17 +385,17 @@ def req2(cont, val_min, val_max, val_mind, val_maxd):
     #return lista
 
     datos = om.values(cont["energy"], val_min, val_max)
-    iter1 = iterator.newIterator(datos)
+    iter1 = it.newIterator(datos)
     contador = 0
     lista = lt.newList("SINGLE_LINKED")
 
-    while iterator.hasNext(iter1):
-        x = iterator.next(iter1)
+    while it.hasNext(iter1):
+        x = it.next(iter1)
         contador += lt.size(x)
-        iter2 = iterator.newIterator(x)
+        iter2 = it.newIterator(x)
 
-        while iterator.hasNext(iter2):
-            y = iterator.next(iter2)
+        while it.hasNext(iter2):
+            y = it.next(iter2)
             artistas = mp.get(y, "artist_id")
             valores = me.getValue(artistas)
 
@@ -403,17 +405,17 @@ def req2(cont, val_min, val_max, val_mind, val_maxd):
     dupla = (cantidad, contador)
     
     datosd = om.values(cont["danceability"], val_mind, val_maxd)
-    iter1d = iterator.newIterator(datosd)
+    iter1d = it.newIterator(datosd)
     contadord = 0
     listad = lt.newList("SINGLE_LINKED")
 
-    while iterator.hasNext(iter1d):
-        xd = iterator.next(iter1d)
+    while it.hasNext(iter1d):
+        xd = it.next(iter1d)
         contador += lt.size(xd)
-        iter2d = iterator.newIterator(xd)
+        iter2d = it.newIterator(xd)
 
-        while iterator.hasNext(iter2d):
-            yd = iterator.next(iter2d)
+        while it.hasNext(iter2d):
+            yd = it.next(iter2d)
             artistasd = mp.get(yd, "artist_id")
             valoresd = me.getValue(artistasd)
 
