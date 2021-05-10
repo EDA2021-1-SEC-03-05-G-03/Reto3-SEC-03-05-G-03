@@ -27,6 +27,7 @@
 from DISClib.DataStructures import linkedlistiterator as it
 from DISClib.DataStructures import orderedmapstructure as mo
 import config as cf
+import random
 from DISClib.ADT import list as lt
 from DISClib.ADT import map as mp
 from DISClib.ADT import orderedmap as om
@@ -69,9 +70,9 @@ def newAnalyzer():
     analyzer['track_ids'] = om.newMap(omaptype='RBT',
                                     comparefunction=compareIds)
     analyzer['danceability'] = om.newMap(omaptype='RBT',
-                                    comparefunction=compareIds)
+                                    comparefunction=compareIdsNum)
     analyzer['energy'] = om.newMap(omaptype='RBT',
-                                    comparefunction=compareTrackId)
+                                    comparefunction=compareIdsNum)
     analyzer['instrumentalness'] = om.newMap(omaptype='RBT',
                                     comparefunction=compareIdsNum)
     analyzer['liveness'] = om.newMap(omaptype='RBT',
@@ -262,7 +263,7 @@ def newMusicEvent(musicEvent):
     """
     entry = {'trackId': None, 'artistId': None}
     entry['trackId'] = mp.newMap(numelements= 100000000,
-                                     maptype='PROBING',
+                                     maptype='RBT',
                                      comparefunction=compareIds(id1, id2))
     entry['artistId'] = lt.newList('SINGLE_LINKED', compareTrackId(tId1, tId2))
     return entry
@@ -348,7 +349,7 @@ def req1(nombre, val_min, val_max, cont):
     dupla = (contador, artistas)
     return dupla
 
-
+#------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Req 2
 
 #intento interno JJ
@@ -358,6 +359,7 @@ def req2( cont, val_min, val_max, val_mind, val_maxd):
     energy = om.values(cont["energy"], val_min, val_max)
     dance = om.values(cont["danceability"], val_mind, val_maxd)
     contador = 0
+    contador2 = 0
     for i in lt.iterator(energy):
         for j in lt.iterator(i):
             contador += 1
@@ -365,22 +367,91 @@ def req2( cont, val_min, val_max, val_mind, val_maxd):
                 #print(key, value)
                 if key == "track_ids":
                     lista.append(value)
-
     for i in lt.iterator(dance):
         for j in lt.iterator(i):
-            contador += 1
+            contador2 += 1
             for key, value in j.items():
                 #print(key, value)
                 if key == "track_ids":
-                    lista.append(value)
-                  
+                    lista2.append(value)             
     lista = list(set(lista))
     lista2 = list(set(lista2))
-    artistas = len(lista)
-    dupla = (contador, artistas)
-    return dupla
+    largo = len(lista)
+    largo2 = len(lista2)
+    cinco = lt.subList(lista2, random.randint(1, float(contador)), 10)
+    return cinco
 
 
+#intento interno
+def req2( cont, val_min, val_max, val_mind, val_maxd): 
+    lista = []
+    lista2 = []
+    energy = om.values(cont["energy"], val_min, val_max)
+    dance = om.values(cont["danceability"], val_mind, val_maxd)
+    contador = 0
+    for i in lt.iterator(energy):
+        for j in lt.iterator(i):
+            contador += 1
+            datos = mp.get(j, "energy")
+            valor = me.getValue(datos)
+            track = mp.get(j, "track_ids")
+            id = me.getValue(track)
+            if float(valor) >= float(val_min) and float(valor) <= float(val_max):
+                if lt.isPresent(lista, id) == 0:
+                    lt.addLast(lista, id) 
+                    lt.addLast(lista2, j)
+    for i in lt.iterator(dance):
+        for j in lt.iterator(i):
+            contador += 1
+            datos = mp.get(j, "danceability")
+            valord = me.getValue(datos)
+            trackd = mp.get(j, "track_ids")
+            idd = me.getValue(trackd)
+            if float(valord) >= float(val_mind) and float(valord) <= float(val_maxd):
+                if lt.isPresent(lista, idd) == 0:
+                    lt.addLast(lista, idd) 
+                    lt.addLast(lista2, j)
+    return lista2
+
+#intento externo 2
+def req2( cont, val_min, val_max, val_mind, val_maxd): 
+    energy = om.values(cont["energy"], val_min, val_max)
+    dance = om.values(cont["danceability"], val_mind, val_maxd)
+    new = it.newIterator(energy)
+    lst = lt.newList("SINGLE_LINKED")
+    paaa = lt.newList("SINGLE_LINKED")
+    while it.hasNext(new):
+        l=it.next(new)
+        nuevo = it.newIterator(l)
+        while it.hasNext(nuevo):
+            pedazo = it.next(nuevo)
+            ax = mp.get(pedazo, "energy")
+            nex = mp.get(pedazo, "track_ids")
+            tax = me.getValue(ax)
+            fex = me.getValue(nex)
+            if float(tax) >= float(val_min) and float(tax) <= float(val_max):
+                if lt.isPresent(lst, fex) == 0:
+                    lt.addLast(paaa, pedazo)
+                    lt.addLast(lst, fex)
+    new = it.newIterator(dance)
+    while it.hasNext(new):
+        l=it.next(new)
+        nuevo = it.newIterator(l)
+        while it.hasNext(nuevo):
+            pedazo = it.next(nuevo)
+            ax = mp.get(pedazo, "danceability")
+            yex = mp.get(pedazo, "track_ids")
+            tax = me.getValue(ax)
+            tex = me.getValue(yex)
+            if float(tax) >= float(val_mind) and float(tax) <= float(val_maxd):
+                if lt.isPresent(lst, tex) == 0:
+                    lt.addLast(paaa, pedazo)
+                    lt.addLast(lst, tex)
+    return paaa
+
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
