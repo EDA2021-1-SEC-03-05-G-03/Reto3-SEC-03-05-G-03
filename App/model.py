@@ -331,34 +331,23 @@ def compareTrackId(tId1, tId2):
 #Req 1
 
 def req1(nombre, val_min, val_max, cont):
-
+    lista = []
     datos = om.values(cont[nombre], val_min, val_max)
     contador = 0
-    for i in lt.iterator(datos):
-        #print(i["first"])
-        for j in lt.iterator(i):
-            #print(j)
-            contador += 1
-        
-    return contador
+    artistas = 0
 
-    #datos = om.values(cont[nombre], val_min, val_max)
-    #iter1 = it.newIterator(datos)
-    #contador = 0
-    #lista = lt.newList("SINGLE_LINKED")
-    #while it.hasNext(iter1):
-    #    x = it.next(iter1)
-    #    contador += lt.size(x)
-    #    iter2 = it.newIterator(x)
-    #    while it.hasNext(iter2):
-    #        y = it.next(iter2)
-    #        artistas = mp.get(y, "artist_id")
-    #        valores = me.getValue(artistas)
-            #if lt.isPresent(lista, valores) == 0:
-                #lt.addLast(lista, valores)
-    #cantidad = lt.size(lista)
-    #dupla = (cantidad, contador)
-    #return dupla
+    for i in lt.iterator(datos):
+        for j in lt.iterator(i):
+            contador += 1
+            for key, value in j.items():
+                #print(key, value)
+                if key == "artist_id":
+                    lista.append(value)
+                    
+    lista = list(set(lista))
+    artistas = len(lista)
+    dupla = (contador, artistas)
+    return dupla
 
 
 #Req 2

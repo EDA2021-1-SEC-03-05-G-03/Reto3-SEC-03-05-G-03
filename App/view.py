@@ -62,7 +62,7 @@ while True:
 
 
     if int(inputs[0]) == 0:
-        print("\nCargando información de los archivos ....")
+        print("\nCargando información de los archivos ...")
         cont = controller.init()
         cont = controller.loadData(cont, user, sentimen, content)
 
