@@ -31,7 +31,6 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import map as mp
 from DISClib.ADT import orderedmap as om
 from DISClib.DataStructures import mapentry as me
-
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
 
@@ -72,7 +71,7 @@ def newAnalyzer():
     analyzer['danceability'] = om.newMap(omaptype='RBT',
                                     comparefunction=compareIds)
     analyzer['energy'] = om.newMap(omaptype='RBT',
-                                    comparefunction=compareIds)
+                                    comparefunction=compareTrackId)
     analyzer['instrumentalness'] = om.newMap(omaptype='RBT',
                                     comparefunction=compareIdsNum)
     analyzer['liveness'] = om.newMap(omaptype='RBT',
@@ -352,63 +351,34 @@ def req1(nombre, val_min, val_max, cont):
 
 #Req 2
 
-def req2(cont, val_min, val_max, val_mind, val_maxd):
-
-    #datos = om.values(cont[nombre], val_min, val_max)
-    #contador = 0
-    #for i in lt.iterator(datos):
-        #print(i["first"])
-    #    for j in i["info"]:
-    #        print(j)
-    #        contador += 1
-        
-    #print (contador)
-    #sise = lt.size(datos)
-    #return lista
-
-    datos = om.values(cont["energy"], val_min, val_max)
-    iter1 = it.newIterator(datos)
+#intento interno JJ
+def req2( cont, val_min, val_max, val_mind, val_maxd): 
+    lista = []
+    lista2 = []
+    energy = om.values(cont["energy"], val_min, val_max)
+    dance = om.values(cont["danceability"], val_mind, val_maxd)
     contador = 0
-    lista = lt.newList("SINGLE_LINKED")
+    for i in lt.iterator(energy):
+        for j in lt.iterator(i):
+            contador += 1
+            for key, value in j.items():
+                #print(key, value)
+                if key == "track_ids":
+                    lista.append(value)
 
-    while it.hasNext(iter1):
-        x = it.next(iter1)
-        contador += lt.size(x)
-        iter2 = it.newIterator(x)
-
-        while it.hasNext(iter2):
-            y = it.next(iter2)
-            artistas = mp.get(y, "artist_id")
-            valores = me.getValue(artistas)
-
-            if lt.isPresent(lista, valores) == 0:
-                lt.addLast(lista, valores)
-    cantidad = lt.size(lista)
-    dupla = (cantidad, contador)
-    
-    datosd = om.values(cont["danceability"], val_mind, val_maxd)
-    iter1d = it.newIterator(datosd)
-    contadord = 0
-    listad = lt.newList("SINGLE_LINKED")
-
-    while it.hasNext(iter1d):
-        xd = it.next(iter1d)
-        contador += lt.size(xd)
-        iter2d = it.newIterator(xd)
-
-        while it.hasNext(iter2d):
-            yd = it.next(iter2d)
-            artistasd = mp.get(yd, "artist_id")
-            valoresd = me.getValue(artistasd)
-
-            if lt.isPresent(listad, valoresd) == 0:
-                lt.addLast(listad, valoresd)
-    cantidadd = lt.size(listad)
-    duplad = (cantidadd, contadord)
-
-
-    return (dupla, duplad)
-
+    for i in lt.iterator(dance):
+        for j in lt.iterator(i):
+            contador += 1
+            for key, value in j.items():
+                #print(key, value)
+                if key == "track_ids":
+                    lista.append(value)
+                  
+    lista = list(set(lista))
+    lista2 = list(set(lista2))
+    artistas = len(lista)
+    dupla = (contador, artistas)
+    return dupla
 
 
 

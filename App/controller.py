@@ -118,6 +118,7 @@ def getArtist(analyzer):
 def req1(nombre, val_min, val_max, cont):
 
     return model.req1(nombre, val_min, val_max, cont)
+    
 
 def req2(cont, val_min, val_max, val_mind, val_maxd):
 

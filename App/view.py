@@ -95,10 +95,10 @@ while True:
 
     elif int(inputs[0]) == 2:
 
-        val_min = int(input("Ingrese el valor minimo de Energy: "))
-        val_max = int(input("Ingrese el valor maximo de Energy: "))
-        val_mind = int(input("Ingrese el valor minimo de Danceability: "))
-        val_maxd = int(input("Ingrese el valor maximo de Danceability: "))
+        val_min = float(input("Ingrese el valor minimo de Energy: "))
+        val_max = float(input("Ingrese el valor maximo de Energy: "))
+        val_mind = float(input("Ingrese el valor minimo de Danceability: "))
+        val_maxd = float(input("Ingrese el valor maximo de Danceability: "))
 
         datos = controller.req2(cont, val_min, val_max, val_mind, val_maxd)
 
