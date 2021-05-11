@@ -103,7 +103,7 @@ while True:
         datos = controller.req1(nombre, val_min, val_max, cont)
 
         print(nombre +"entre ",val_min ,"y ",val_max)
-        print("Total de reproducciones: ",datos[0][0]  + "Total de artistas unicos: ",datos[0][1])
+        print("Total de reproducciones: ",datos[0][0]  , "Total de artistas unicos: ",datos[0][1])
 
 
         print("Tiempo [ms]: ", f"{datos[1]:.3f}", "  ||  ",
@@ -123,11 +123,11 @@ while True:
         print("Danceability entre ",val_mind ,"y ",val_maxd)
         print("Total de tracks unicos: ",datos[0][1])
 
-        print("Track 1: "+ datos[0][0][0])
-        print("Track 2: "+ datos[0][0][1])
-        print("Track 3: "+ datos[0][0][2])
-        print("Track 4: "+ datos[0][0][3])
-        print("Track 5: "+ datos[0][0][4])
+        print("Track 1: ", datos[0][0][0])
+        print("Track 2: ", datos[0][0][1])
+        print("Track 3: ", datos[0][0][2])
+        print("Track 4: ", datos[0][0][3])
+        print("Track 5: ", datos[0][0][4])
 
 
         print("Tiempo [ms]: ", f"{datos[1]:.3f}", "  ||  ",
@@ -147,11 +147,11 @@ while True:
         print("Tempo entre ",val_mind ,"y ",val_maxd)
         print("Total de tracks unicos: ",datos[0][1])
 
-        print("Track 1: "+ datos[0][0][0])
-        print("Track 2: "+ datos[0][0][1])
-        print("Track 3: "+ datos[0][0][2])
-        print("Track 4: "+ datos[0][0][3])
-        print("Track 5: "+ datos[0][0][4])
+        print("Track 1: ", datos[0][0][0])
+        print("Track 2: ", datos[0][0][1])
+        print("Track 3: ", datos[0][0][2])
+        print("Track 4: ", datos[0][0][3])
+        print("Track 5: ", datos[0][0][4])
 
 
         print("Tiempo [ms]: ", f"{datos[1]:.3f}", "  ||  ",
