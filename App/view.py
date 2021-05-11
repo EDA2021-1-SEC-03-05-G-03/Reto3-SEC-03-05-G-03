@@ -101,6 +101,7 @@ while True:
         val_maxd = float(input("Ingrese el valor maximo de Danceability: "))
 
         datos = controller.req2(cont, val_min, val_max, val_mind, val_maxd)
+        print(datos)
 
 
     elif int(inputs[0]) == 3:

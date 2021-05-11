@@ -356,102 +356,38 @@ def req1(nombre, val_min, val_max, cont):
 #intento interno JJ
 def req2( cont, val_min, val_max, val_mind, val_maxd): 
     lista = []
-    lista2 = []
-    energy = om.values(cont["energy"], val_min, val_max)
-    dance = om.values(cont["danceability"], val_mind, val_maxd)
-    contador = 0
-    contador2 = 0
-    for i in lt.iterator(energy):
+    listatrack = []
+    datos = om.values(cont["energy"], val_min, val_max)
+    artistas = 0
+
+#    for i in lt.iterator(datos):
+#        for j in lt.iterator(i):
+#            for key, value in j.items():
+#                if key == "danceability":
+#                    if val_mind < float(value) < val_maxd:
+#                        lista.append(value)
+#                if key == "track_id":
+#                    listatrack.append(value)
+
+    for i in lt.iterator(datos):
         for j in lt.iterator(i):
-            contador += 1
             for key, value in j.items():
-                #print(key, value)
-                if key == "track_ids":
-                    lista.append(value)
-    for i in lt.iterator(dance):
-        for j in lt.iterator(i):
-            contador2 += 1
-            for key, value in j.items():
-                #print(key, value)
-                if key == "track_ids":
-                    lista2.append(value)             
+                if key == "danceability":
+                    if val_mind < float(value) < val_maxd:
+                        #lista.append(value)
+                        for key, value in j.items():
+                            if key == "track_id":
+                                listatrack.append(value)
+
     lista = list(set(lista))
-    lista2 = list(set(lista2))
-    largo = len(lista)
-    largo2 = len(lista2)
-    cinco = lt.subList(lista2, random.randint(1, float(contador)), 10)
-    return cinco
+    artistas = len(lista)
+    gg = len(list(set(listatrack)))
+    #dupla = (listatrack, artistas)
+    dupla = (listatrack, gg)
+
+    return dupla
 
 
-
-#intento interno
-def req2( cont, val_min, val_max, val_mind, val_maxd): 
-    lista = []
-    lista2 = []
-    energy = om.values(cont["energy"], val_min, val_max)
-    dance = om.values(cont["danceability"], val_mind, val_maxd)
-    contador = 0
-    for i in lt.iterator(energy):
-        for j in lt.iterator(i):
-            contador += 1
-            datos = mp.get(j, "energy")
-            valor = me.getValue(datos)
-            track = mp.get(j, "track_ids")
-            id = me.getValue(track)
-            if float(valor) >= float(val_min) and float(valor) <= float(val_max):
-                if lt.isPresent(lista, id) == 0:
-                    lt.addLast(lista, id) 
-                    lt.addLast(lista2, j)
-    for i in lt.iterator(dance):
-        for j in lt.iterator(i):
-            contador += 1
-            datos = mp.get(j, "danceability")
-            valord = me.getValue(datos)
-            trackd = mp.get(j, "track_ids")
-            idd = me.getValue(trackd)
-            if float(valord) >= float(val_mind) and float(valord) <= float(val_maxd):
-                if lt.isPresent(lista, idd) == 0:
-                    lt.addLast(lista, idd) 
-                    lt.addLast(lista2, j)
-    return lista2
-
-
-
-#intento externo 2
-def req2( cont, val_min, val_max, val_mind, val_maxd): 
-    energy = om.values(cont["energy"], val_min, val_max)
-    dance = om.values(cont["danceability"], val_mind, val_maxd)
-    new = it.newIterator(energy)
-    lst = lt.newList("SINGLE_LINKED")
-    paaa = lt.newList("SINGLE_LINKED")
-    while it.hasNext(new):
-        l=it.next(new)
-        nuevo = it.newIterator(l)
-        while it.hasNext(nuevo):
-            pedazo = it.next(nuevo)
-            ax = mp.get(pedazo, "energy")
-            nex = mp.get(pedazo, "track_ids")
-            tax = me.getValue(ax)
-            fex = me.getValue(nex)
-            if float(tax) >= float(val_min) and float(tax) <= float(val_max):
-                if lt.isPresent(lst, fex) == 0:
-                    lt.addLast(paaa, pedazo)
-                    lt.addLast(lst, fex)
-    new = it.newIterator(dance)
-    while it.hasNext(new):
-        l=it.next(new)
-        nuevo = it.newIterator(l)
-        while it.hasNext(nuevo):
-            pedazo = it.next(nuevo)
-            ax = mp.get(pedazo, "danceability")
-            yex = mp.get(pedazo, "track_ids")
-            tax = me.getValue(ax)
-            tex = me.getValue(yex)
-            if float(tax) >= float(val_mind) and float(tax) <= float(val_maxd):
-                if lt.isPresent(lst, tex) == 0:
-                    lt.addLast(paaa, pedazo)
-                    lt.addLast(lst, tex)
-    return paaa
 
 
 
@@ -463,49 +399,23 @@ def req3(cont, val_min, val_max, val_mint, val_maxt):
     lista = []
     listatrack = []
     datos = om.values(cont["instrumentalness"], val_min, val_max)
-    contador = 0
     artistas = 0
 
     for i in lt.iterator(datos):
         for j in lt.iterator(i):
-            #print(j)
-            #contador += 1
             for key, value in j.items():
-                #print(key, value)
-                #if key == "track_id":
-                #    lista.append(value)
                 if key == "tempo":
                     if val_mint < float(value) < val_maxt:
                         lista.append(value)
                 if key == "track_id":
                     listatrack.append(value)
 
-            
-        
-                    
     lista = list(set(lista))
     artistas = len(lista)
     dupla = (listatrack, artistas)
     return dupla
 
-def req32(cont, val_mint, val_maxt):
-    lista = []
-    datos = om.values(cont["tempo"], val_mint, val_maxt)
-    contador = 0
-    artistas = 0
 
-    for i in lt.iterator(datos):
-        for j in lt.iterator(i):
-            contador += 1
-            for key, value in j.items():
-                #print(key, value)
-                if key == "track_id":
-                    lista.append(value)
-                    
-    lista = list(set(lista))
-    artistas = len(lista)
-    dupla = (contador, artistas)
-    return dupla
 
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------
