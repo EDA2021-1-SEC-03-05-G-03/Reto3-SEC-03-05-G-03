@@ -34,9 +34,9 @@ se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
 
-user = "user_track_hashtag_timestamp-small.csv"
+user = "user_track_hashtag_timestamp-10pct.csv"
 sentimen = "sentiment_values.csv"
-content = "context_content_features-small.csv"
+content = "context_content_features-10pct.csv"
 cont = None
 
 def loadData(cont, user, sentimen, content):
