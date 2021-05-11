@@ -352,6 +352,7 @@ def req1(nombre, val_min, val_max, cont):
 #------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Req 2
 
+
 #intento interno JJ
 def req2( cont, val_min, val_max, val_mind, val_maxd): 
     lista = []
@@ -380,6 +381,7 @@ def req2( cont, val_min, val_max, val_mind, val_maxd):
     largo2 = len(lista2)
     cinco = lt.subList(lista2, random.randint(1, float(contador)), 10)
     return cinco
+
 
 
 #intento interno
@@ -412,6 +414,8 @@ def req2( cont, val_min, val_max, val_mind, val_maxd):
                     lt.addLast(lista, idd) 
                     lt.addLast(lista2, j)
     return lista2
+
+
 
 #intento externo 2
 def req2( cont, val_min, val_max, val_mind, val_maxd): 
@@ -453,7 +457,58 @@ def req2( cont, val_min, val_max, val_mind, val_maxd):
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+#Req 3
 
+def req3(cont, val_min, val_max, val_mint, val_maxt):
+    lista = []
+    listatrack = []
+    datos = om.values(cont["instrumentalness"], val_min, val_max)
+    contador = 0
+    artistas = 0
+
+    for i in lt.iterator(datos):
+        for j in lt.iterator(i):
+            #print(j)
+            #contador += 1
+            for key, value in j.items():
+                #print(key, value)
+                #if key == "track_id":
+                #    lista.append(value)
+                if key == "tempo":
+                    if val_mint < float(value) < val_maxt:
+                        lista.append(value)
+                if key == "track_id":
+                    listatrack.append(value)
+
+            
+        
+                    
+    lista = list(set(lista))
+    artistas = len(lista)
+    dupla = (listatrack, artistas)
+    return dupla
+
+def req32(cont, val_mint, val_maxt):
+    lista = []
+    datos = om.values(cont["tempo"], val_mint, val_maxt)
+    contador = 0
+    artistas = 0
+
+    for i in lt.iterator(datos):
+        for j in lt.iterator(i):
+            contador += 1
+            for key, value in j.items():
+                #print(key, value)
+                if key == "track_id":
+                    lista.append(value)
+                    
+    lista = list(set(lista))
+    artistas = len(lista)
+    dupla = (contador, artistas)
+    return dupla
+
+
+#------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Req 4
 

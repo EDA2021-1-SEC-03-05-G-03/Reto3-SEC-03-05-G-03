@@ -124,6 +124,12 @@ def req2(cont, val_min, val_max, val_mind, val_maxd):
 
     return model.req2(cont, val_min, val_max, val_mind, val_maxd)
 
+def req3(cont, val_min, val_max, val_mint, val_maxt):
+
+    datosInstru = model.req3(cont, val_min, val_max, val_mint, val_maxt)
+    #datosTempo = model.req32(datosInstru, val_mint, val_maxt)
+
+    return datosInstru
 
 def agregar_nuevo(nombre, val_min, val_max):
     

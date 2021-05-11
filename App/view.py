@@ -105,10 +105,13 @@ while True:
 
     elif int(inputs[0]) == 3:
 
-        val_min = int(input("Ingrese el valor minimo del rango de Instrumentalness: "))
-        val_max = int(input("Ingrese el valor maximo del rango de Instrumentalness: "))
-        val_mint = int(input("Ingrese el valor minimo del rango de Tempo: "))
-        val_maxt = int(input("Ingrese el valor maximo del rango de Tempo: "))
+        val_min = float(input("Ingrese el valor minimo del rango de Instrumentalness: "))
+        val_max = float(input("Ingrese el valor maximo del rango de Instrumentalness: "))
+        val_mint = float(input("Ingrese el valor minimo del rango de Tempo: "))
+        val_maxt = float(input("Ingrese el valor maximo del rango de Tempo: "))
+
+        datos = controller.req3(cont, val_min, val_max, val_mint, val_maxt)
+        print(datos)
         
 
     elif int(inputs[0]) == 4:
