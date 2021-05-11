@@ -39,6 +39,12 @@ sentimen = "sentiment_values.csv"
 content = "context_content_features-small.csv"
 cont = None
 
+def loadData(cont, user, sentimen, content):
+    """
+    Carga los libros en la estructura de datos
+    """
+    controller.loadData(cont, user, sentimen, content)
+
 
 def printMenu():
     print("\nBienvenido")
@@ -64,7 +70,7 @@ while True:
     if int(inputs[0]) == 0:
         print("\nCargando información de los archivos ...")
         cont = controller.init()
-        cont = controller.loadData(cont, user, sentimen, content)
+        loadData(cont, user, sentimen, content)
 
         print('Numero de eventos: ' + str(lt.size(cont["events"])))
 
@@ -82,6 +88,11 @@ while True:
             print(lt.getElement(cont["events"], lt.size(cont["events"]) - j))
             j += 1
 
+        # Calcular tiempo
+        answer = controller.loadData(cont, user, sentimen, content)
+        print("Tiempo [ms]: ", f"{answer[0]:.3f}", "  ||  ",
+               "Memoria [kB]: ", f"{answer[1]:.3f}")
+
 
     elif int(inputs[0]) == 1:
 
@@ -91,6 +102,10 @@ while True:
 
         datos = controller.req1(nombre, val_min, val_max, cont)
         print(datos)
+
+        answer = controller.req1(nombre, val_min, val_max, cont)
+        print("Tiempo [ms]: ", f"{answer[0]:.3f}", "  ||  ",
+               "Memoria [kB]: ", f"{answer[1]:.3f}")
 
 
     elif int(inputs[0]) == 2:

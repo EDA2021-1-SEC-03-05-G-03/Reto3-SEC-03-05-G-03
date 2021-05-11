@@ -355,19 +355,8 @@ def req1(nombre, val_min, val_max, cont):
 
 #intento interno JJ
 def req2( cont, val_min, val_max, val_mind, val_maxd): 
-    lista = []
     listatrack = []
     datos = om.values(cont["energy"], val_min, val_max)
-    artistas = 0
-
-#    for i in lt.iterator(datos):
-#        for j in lt.iterator(i):
-#            for key, value in j.items():
-#                if key == "danceability":
-#                    if val_mind < float(value) < val_maxd:
-#                        lista.append(value)
-#                if key == "track_id":
-#                    listatrack.append(value)
 
     for i in lt.iterator(datos):
         for j in lt.iterator(i):
@@ -379,10 +368,7 @@ def req2( cont, val_min, val_max, val_mind, val_maxd):
                             if key == "track_id":
                                 listatrack.append(value)
 
-    lista = list(set(lista))
-    artistas = len(lista)
     gg = len(list(set(listatrack)))
-    #dupla = (listatrack, artistas)
     dupla = (listatrack, gg)
 
     return dupla
@@ -414,7 +400,6 @@ def req3(cont, val_min, val_max, val_mint, val_maxt):
     artistas = len(lista)
     dupla = (listatrack, artistas)
     return dupla
-
 
 
 
