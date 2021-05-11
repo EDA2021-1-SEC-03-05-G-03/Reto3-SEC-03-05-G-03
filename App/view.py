@@ -104,8 +104,8 @@ while True:
         print(datos)
 
         answer = controller.req1(nombre, val_min, val_max, cont)
-        print("Tiempo [ms]: ", f"{answer[0]:.3f}", "  ||  ",
-               "Memoria [kB]: ", f"{answer[1]:.3f}")
+        print("Tiempo [ms]: ", f"{answer[1]:.3f}", "  ||  ",
+               "Memoria [kB]: ", f"{answer[2]:.3f}")
 
 
     elif int(inputs[0]) == 2:
