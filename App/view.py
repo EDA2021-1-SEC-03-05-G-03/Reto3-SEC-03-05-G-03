@@ -102,8 +102,8 @@ while True:
 
         datos = controller.req1(nombre, val_min, val_max, cont)
 
-        print(nombre +"entre ",val_min ,"y ",val_max)
-        print("Total de reproducciones: ",datos[0][0]  , "Total de artistas unicos: ",datos[0][1])
+        print(nombre +" entre ",val_min ," y ",val_max)
+        print("Total de reproducciones: ",datos[0][0]  , " Total de artistas unicos: ",datos[0][1])
 
 
         print("Tiempo [ms]: ", f"{datos[1]:.3f}", "  ||  ",
@@ -119,8 +119,8 @@ while True:
 
         datos = controller.req2(cont, val_min, val_max, val_mind, val_maxd)
 
-        print("Energy entre ",val_min ,"y ",val_max)
-        print("Danceability entre ",val_mind ,"y ",val_maxd)
+        print("Energy entre ",val_min ," y ",val_max)
+        print("Danceability entre ",val_mind ," y ",val_maxd)
         print("Total de tracks unicos: ",datos[0][1])
 
         print("Track 1: ", datos[0][0][0])
@@ -143,8 +143,8 @@ while True:
 
         datos = controller.req3(cont, val_min, val_max, val_mint, val_maxt)
 
-        print("Instrumentalness entre ",val_min ,"y ",val_max)
-        print("Tempo entre ",val_mind ,"y ",val_maxd)
+        print("Instrumentalness entre ",val_min ," y ",val_max)
+        print("Tempo entre ",val_mind ," y ",val_maxd)
         print("Total de tracks unicos: ",datos[0][1])
 
         print("Track 1: ", datos[0][0][0])
