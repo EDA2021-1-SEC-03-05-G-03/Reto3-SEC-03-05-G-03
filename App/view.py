@@ -101,11 +101,13 @@ while True:
         val_max = float(input("Ingrese el valor maximo de la caracteristica: "))
 
         datos = controller.req1(nombre, val_min, val_max, cont)
-        print(datos)
 
-        answer = controller.req1(nombre, val_min, val_max, cont)
-        print("Tiempo [ms]: ", f"{answer[1]:.3f}", "  ||  ",
-               "Memoria [kB]: ", f"{answer[2]:.3f}")
+        print(nombre +"entre ",val_min ,"y ",val_max)
+        print("Total de reproducciones: ",datos[0][0]  + "Total de artistas unicos: ",datos[0][1])
+
+
+        print("Tiempo [ms]: ", f"{datos[1]:.3f}", "  ||  ",
+               "Memoria [kB]: ", f"{datos[2]:.3f}")
 
 
     elif int(inputs[0]) == 2:
@@ -116,7 +118,20 @@ while True:
         val_maxd = float(input("Ingrese el valor maximo de Danceability: "))
 
         datos = controller.req2(cont, val_min, val_max, val_mind, val_maxd)
-        print(datos)
+
+        print("Energy entre ",val_min ,"y ",val_max)
+        print("Danceability entre ",val_mind ,"y ",val_maxd)
+        print("Total de tracks unicos: ",datos[0][1])
+
+        print("Track 1: "+ datos[0][0][0])
+        print("Track 2: "+ datos[0][0][1])
+        print("Track 3: "+ datos[0][0][2])
+        print("Track 4: "+ datos[0][0][3])
+        print("Track 5: "+ datos[0][0][4])
+
+
+        print("Tiempo [ms]: ", f"{datos[1]:.3f}", "  ||  ",
+               "Memoria [kB]: ", f"{datos[2]:.3f}")
 
 
     elif int(inputs[0]) == 3:
@@ -127,7 +142,20 @@ while True:
         val_maxt = float(input("Ingrese el valor maximo del rango de Tempo: "))
 
         datos = controller.req3(cont, val_min, val_max, val_mint, val_maxt)
-        print(datos)
+
+        print("Instrumentalness entre ",val_min ,"y ",val_max)
+        print("Tempo entre ",val_mind ,"y ",val_maxd)
+        print("Total de tracks unicos: ",datos[0][1])
+
+        print("Track 1: "+ datos[0][0][0])
+        print("Track 2: "+ datos[0][0][1])
+        print("Track 3: "+ datos[0][0][2])
+        print("Track 4: "+ datos[0][0][3])
+        print("Track 5: "+ datos[0][0][4])
+
+
+        print("Tiempo [ms]: ", f"{datos[1]:.3f}", "  ||  ",
+               "Memoria [kB]: ", f"{datos[2]:.3f}")
         
 
     elif int(inputs[0]) == 4:
@@ -141,7 +169,12 @@ while True:
         val_min = int(input("Ingrese el valor minimo del Tempo: "))
         val_max = int(input("Ingrese el valor maximo del Tempo: "))
 
-        print(controller.agregar_nuevo(nombre, val_min, val_max))
+        datos = controller.agregar_nuevo(nombre, val_min, val_max)
+        print(datos[0])
+
+
+        print("Tiempo [ms]: ", f"{datos[1]:.3f}", "  ||  ",
+               "Memoria [kB]: ", f"{datos[2]:.3f}")
 
 
     elif int(inputs[0]) == 6:

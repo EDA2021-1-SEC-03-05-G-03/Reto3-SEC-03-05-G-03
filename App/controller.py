@@ -188,15 +188,62 @@ def req1(nombre, val_min, val_max, cont):
 
 def req2(cont, val_min, val_max, val_mind, val_maxd):
 
-    return model.req2(cont, val_min, val_max, val_mind, val_maxd)
+    delta_time = -1.0
+    delta_memory = -1.0
+
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
+
+    datos = model.req2(cont, val_min, val_max, val_mind, val_maxd)
+
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
+
+    return datos, delta_time, delta_memory
+
 
 def req3(cont, val_min, val_max, val_mint, val_maxt):
 
-    datosInstru = model.req3(cont, val_min, val_max, val_mint, val_maxt)
-    #datosTempo = model.req32(datosInstru, val_mint, val_maxt)
+    delta_time = -1.0
+    delta_memory = -1.0
 
-    return datosInstru
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
+
+    datosInstru = model.req3(cont, val_min, val_max, val_mint, val_maxt)
+
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
+
+    return datosInstru, delta_time, delta_memory
+
 
 def agregar_nuevo(nombre, val_min, val_max):
+
+    delta_time = -1.0
+    delta_memory = -1.0
+
+    tracemalloc.start()
+    start_time = getTime()
+    start_memory = getMemory()
     
-    return model.agregar_nuevo(nombre, val_min, val_max, model.diccionario_generos())
+    datos = model.agregar_nuevo(nombre, val_min, val_max, model.diccionario_generos())
+
+    stop_memory = getMemory()
+    stop_time = getTime()
+    tracemalloc.stop()
+
+    delta_time = stop_time - start_time
+    delta_memory = deltaMemory(start_memory, stop_memory)
+
+    return datos, delta_time, delta_memory

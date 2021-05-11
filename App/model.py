@@ -346,14 +346,12 @@ def req1(nombre, val_min, val_max, cont):
                     
     lista = list(set(lista))
     artistas = len(lista)
-    dupla = (contador, artistas)
+    dupla = (contador/2, artistas)
     return dupla
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Req 2
 
-
-#intento interno JJ
 def req2( cont, val_min, val_max, val_mind, val_maxd): 
     listatrack = []
     datos = om.values(cont["energy"], val_min, val_max)
